@@ -1,0 +1,38 @@
+{
+    "name": "phplum/fs",
+    "description": "This library provides methods for interacting with the file system in a way modeled on standard POSIX utilities.",
+    "keywords": [
+        "filesystem",
+        "posix",
+        "path",
+        "file",
+        "directory"
+    ],
+    "type": "library",
+    "prefer-stable": true,
+    "license": "BSD-3-Clause",
+    "homepage": "https://github.com/phplum/phplum-fs",
+    "support": {
+        "issues": "https://github.com/phplum/phplum-fs/issues",
+        "security": "https://github.com/phplum/phplum-fs/security/policy"
+    },
+    "authors": [
+        {
+            "name": "Garrett HE",
+            "email": "garrett.he@outlook.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "phplum\\fs\\": "./src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "phplum\\fs\\tests\\": "./tests/"
+        }
+    }
+}
