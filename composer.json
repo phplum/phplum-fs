@@ -25,12 +25,14 @@
     "scripts": {
         "analyse": "./vendor/bin/phpstan analyse",
         "lint": "./vendor/bin/phpcs -s",
-        "test": "./vendor/bin/phpunit"
+        "test": "./vendor/bin/phpunit",
+        "post-autoload-dump": "./vendor/bin/captainhook install -f -s"
     },
     "require": {
         "php": ">=8.1"
     },
     "require-dev": {
+        "captainhook/captainhook": "^5.16.4",
         "phpstan/phpstan": "^1.10.28",
         "phpunit/phpunit": "^10.2.5",
         "squizlabs/php_codesniffer": "^3.7.2"
