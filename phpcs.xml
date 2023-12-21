@@ -36,6 +36,7 @@
         <exclude name="Squiz.Functions.FunctionDeclarationArgumentSpacing.SpaceAfterEquals"/>
         <exclude name="Squiz.Operators.ComparisonOperatorUsage.ImplicitTrue"/>
         <exclude name="Squiz.Operators.ComparisonOperatorUsage.NotAllowed"/>
+        <exclude name="Squiz.PHP.DisallowBooleanStatement.Found"/>
     </rule>
 
     <rule ref="Generic.Files.LineLength">
