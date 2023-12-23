@@ -194,4 +194,49 @@ final class FileSystem
             throw new IOException(sprintf('Failed to copy file "%s" to "%s": %s', $src, $dest, self::$lastError));
         }
     }
+
+    /**
+     * Copies the source file or entire directory to destination.
+     *
+     * If $recursive = false, this method works similarly with copyFile.
+     *
+     * @param string $src Path of source file or directory.
+     * @param string $dest Path of destination.
+     *
+     * @return void
+     * @throws IOException If failed to copy files.
+     */
+    public static function cp(string $src, string $dest): void
+    {
+        if (is_file($src)) {
+            self::copyFile($src, $dest);
+            return;
+        }
+
+        $mode = fileperms($src);
+
+        if ($mode === false) {
+            $mode = 0777;
+        }
+
+        self::mkdir($dest, $mode);
+
+        $dir = opendir($src);
+
+        if ($dir === false) {
+            throw new IOException(sprintf('Unable to open directory "%s".', $src));
+        }
+
+        try {
+            while (($file = readdir($dir)) !== false) {
+                if ($file === '.' || $file === '..') {
+                    continue;
+                }
+
+                self::cp(new Path($src, $file), new Path($dest, $file));
+            }
+        } finally {
+            closedir($dir);
+        }
+    }
 }
