@@ -178,4 +178,20 @@ final class FileSystem
             throw new IOException(sprintf('Failed to close file: %s.', self::$lastError));
         }
     }
+
+    /**
+     * Copies the source file to destination.
+     *
+     * @param string $src Path of source file.
+     * @param string $dest Path of destination.
+     *
+     * @return void
+     * @throws IOException If failed to copy file.
+     */
+    public static function copyFile(string $src, string $dest): void
+    {
+        if (self::invoke('copy', $src, $dest) === false) {
+            throw new IOException(sprintf('Failed to copy file "%s" to "%s": %s', $src, $dest, self::$lastError));
+        }
+    }
 }
