@@ -38,6 +38,7 @@
         <exclude name="Squiz.Operators.ComparisonOperatorUsage.NotAllowed"/>
         <exclude name="Squiz.PHP.DisallowBooleanStatement.Found"/>
         <exclude name="Squiz.Commenting.ClassComment.TagNotAllowed"/>
+        <exclude name="Generic.Formatting.MultipleStatementAlignment.NotSame"/>
     </rule>
 
     <rule ref="Generic.Files.LineLength">
