@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog][1], and this project adheres
 to [Semantic Versioning][2].
 
+## [1.1.0] - 2023-04-09
+
+### Added
+
+- Method `FileSystem::copyFile()` to copy files.
+- Method `FileSystem::cp()` to copy files or entire directories.
+- Method `FileSystem::rmdir()` to remove entire directories.
+- Method `FileSystem::rename()` to rename/move files or directories.
+
 ## [1.0.0] - 2023-04-07
 
 ### Added
