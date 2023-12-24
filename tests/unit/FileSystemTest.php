@@ -205,7 +205,7 @@ class FileSystemTest extends TestCase
      *
      * @return void
      */
-    public function testRmdir()
+    public function testRmdir(): void
     {
         $path = new Path($this->workDir, uniqid());
         FileSystem::mkdir($path);
@@ -213,5 +213,37 @@ class FileSystemTest extends TestCase
 
         FileSystem::rmdir($path);
         $this->assertFalse(is_dir($path));
+    }
+
+    /**
+     * Tests method `rename`
+     *
+     * @return void
+     * @throws Exception If not able to generate random bytes.
+     */
+    public function testRename(): void
+    {
+        $content = random_bytes(64);
+
+        $srcFile = new Path($this->workDir, uniqid());
+        file_put_contents($srcFile, $content);
+
+        $destFile = new Path($this->workDir, uniqid());
+
+        FileSystem::rename($srcFile, $destFile);
+        $this->assertFalse(file_exists($srcFile));
+        $this->assertTrue(is_file($destFile));
+        $this->assertEquals($content, file_get_contents($destFile));
+        unlink($destFile);
+
+        $srcDir = new Path($this->workDir, uniqid());
+        FileSystem::mkdir($srcDir);
+
+        $destDir = new Path($this->workDir, uniqid());
+
+        FileSystem::rename($srcDir, $destDir);
+        $this->assertFalse(file_exists($srcDir));
+        $this->assertTrue(is_dir($destDir));
+        rmdir($destDir);
     }
 }
