@@ -239,4 +239,23 @@ final class FileSystem
             closedir($dir);
         }
     }
+
+    /**
+     * Removes a directory.
+     *
+     * @param string $path Path of directory.
+     *
+     * @return void
+     * @throws IOException If failed to remove directory.
+     */
+    public static function rmdir(string $path): void
+    {
+        if (!file_exists($path)) {
+            return;
+        }
+
+        if (self::invoke('rmdir', $path) === false) {
+            throw new IOException(sprintf('Failed to remove directory "%s": %s', $path, self::$lastError));
+        }
+    }
 }
