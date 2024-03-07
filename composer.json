@@ -24,6 +24,7 @@
         }
     ],
     "scripts": {
+        "analyse": "./vendor/bin/phpstan analyse",
         "test": "./vendor/bin/phpunit",
         "lint": "./vendor/bin/phpcs --standard=psr2 src"
     },
