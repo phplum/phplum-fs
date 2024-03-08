@@ -14,10 +14,13 @@
                 "action": "\\CaptainHook\\App\\Hook\\PHP\\Action\\Linting"
             },
             {
-                "action": "composer run-script test"
+                "action": "composer run-script lint"
             },
             {
-                "action": "composer run-script lint"
+                "action": "composer run-script analyse"
+            },
+            {
+                "action": "composer run-script test"
             }
         ]
     },
