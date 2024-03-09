@@ -14,7 +14,6 @@ final class FileSystem
      * Last error for `invoke` method.
      *
      * @var string|null
-     * @phpstan-ignore property.onlyWritten
      */
     private static ?string $lastError;
 
@@ -57,5 +56,26 @@ final class FileSystem
     public static function errorHandler(int $type, string $msg): void
     {
         self::$lastError = $msg;
+    }
+
+    /**
+     * Creates a new directory.
+     *
+     * @param string $path Path of the new directory.
+     * @param integer $mode Access permissions of the new directory.
+     * @param boolean $recursive If true, parent directories will also be created.
+     *
+     * @return void
+     * @throws IOException If failed to create the directory.
+     */
+    public static function mkdir(string $path, int $mode = 0777, bool $recursive = false): void
+    {
+        if (is_dir($path)) {
+            return;
+        }
+
+        if (!self::invoke('mkdir', $path, $mode, $recursive)) {
+            throw new IOException(sprintf('Failed to create directory: "%s": %s', $path, self::$lastError));
+        }
     }
 }
