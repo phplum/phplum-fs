@@ -78,4 +78,24 @@ final class FileSystem
             throw new IOException(sprintf('Failed to create directory: "%s": %s', $path, self::$lastError));
         }
     }
+
+    /**
+     * Removes a file or symbolic link.
+     *
+     * @param string $path Path of file.
+     *
+     * @return void
+     * @throws FileNotFoundException If the specified file is missing.
+     * @throws IOException If failed to remove the file.
+     */
+    public static function unlink(string $path): void
+    {
+        if (!file_exists($path)) {
+            throw new FileNotFoundException($path);
+        }
+
+        if (!self::invoke('unlink', $path)) {
+            throw new IOException(sprintf('Failed to remove file: "%s": %s.', $path, self::$lastError));
+        }
+    }
 }
