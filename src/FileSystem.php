@@ -98,4 +98,53 @@ final class FileSystem
             throw new IOException(sprintf('Failed to remove file: "%s": %s.', $path, self::$lastError));
         }
     }
+
+    /**
+     * Removes files and directories.
+     *
+     * @param string $path Path of file or directory.
+     * @param boolean $recursive If true, perform a recursive directory removal.
+     * @param boolean $force When true, exceptions will be ignored if $path does not exist.
+     *
+     * @return void
+     * @throws FileNotFoundException If the specified file is missing.
+     * @throws IOException If failed to remove the file.
+     */
+    public static function rm(string $path, bool $recursive = false, bool $force = false): void
+    {
+        if (!file_exists($path)) {
+            if ($force) {
+                return;
+            }
+
+            throw new FileNotFoundException($path);
+        }
+
+        if (is_file($path)) {
+            self::unlink($path);
+            return;
+        }
+
+        if (!$recursive) {
+            throw new IOException(sprintf('Failed to remove: "%s" is a directory.', $path));
+        }
+
+        $items = glob(new Path($path, '{,.}*'), (GLOB_MARK | GLOB_BRACE));
+
+        if ($items === false) {
+            throw new IOException(sprintf('Error occurred on finding files in "%s".', $path));
+        }
+
+        foreach ($items as $item) {
+            if (basename($item) == '.' || basename($item) == '..') {
+                continue;
+            }
+
+            self::rm($item, $recursive, $force);
+        }
+
+        if (!self::invoke('rmdir', $path)) {
+            throw new IOException(sprintf('Failed to remove: "%s": %s', $path, self::$lastError));
+        }
+    }
 }
