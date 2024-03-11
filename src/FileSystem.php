@@ -147,4 +147,35 @@ final class FileSystem
             throw new IOException(sprintf('Failed to remove: "%s": %s', $path, self::$lastError));
         }
     }
+
+    /**
+     * Writes data to a file, replacing the file if it already exists.
+     *
+     * @param string|resource $file Path or pointer resource of file.
+     * @param mixed $data Data to be written.
+     * @param string $mode File mode, only affects the newly created file.
+     *
+     * @return void
+     * @throws IOException If error occurred on writing file.
+     */
+    public static function writeFile(mixed $file, mixed $data, string $mode = 'w'): void
+    {
+        if (!is_resource($file)) {
+            $fp = self::invoke('fopen', $file, $mode);
+
+            if ($fp === false) {
+                throw new IOException(sprintf('Failed to open file: %s.', self::$lastError));
+            }
+        } else {
+            $fp = $file;
+        }
+
+        if (self::invoke('fwrite', $fp, $data) === false) {
+            throw new IOException(sprintf('Failed to write file: %s.', self::$lastError));
+        }
+
+        if (self::invoke('fclose', $fp) === false) {
+            throw new IOException(sprintf('Failed to close file: %s.', self::$lastError));
+        }
+    }
 }
