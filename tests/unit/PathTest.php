@@ -11,7 +11,7 @@ use phplum\fs\Path;
 class PathTest extends TestCase
 {
     /**
-     * Test method Path::__construct()
+     * Tests method Path::__construct()
      *
      * @return void
      */
@@ -32,5 +32,33 @@ class PathTest extends TestCase
             'path1' . DIRECTORY_SEPARATOR . 'path2' . DIRECTORY_SEPARATOR . 'path3',
             new Path('path1', 'path2', 'path3')
         );
+    }
+
+    /**
+     * Tests property `parent`.
+     *
+     * @return void
+     */
+    public function testPropertyParent(): void
+    {
+        $path = new Path('path', 'to', 'file');
+
+        $this->assertEquals('path' . DIRECTORY_SEPARATOR . 'to', $path->parent);
+        $this->assertEquals('phplum\fs\Path', $path->parent::class);
+    }
+
+    /**
+     * Tests trying to get unknown properties.
+     *
+     * @return void
+     */
+    public function testUnknownProperty(): void
+    {
+        $path = new Path('');
+
+        $this->expectException(\RuntimeException::class);
+
+        // @phpstan-ignore-next-line
+        $path->unknownProperty;
     }
 }
