@@ -12,10 +12,18 @@ permissions:
 jobs:
   build:
 
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        php-version: [ "8.1", "8.2" ]
 
     steps:
       - uses: actions/checkout@v3
+
+      - uses: nanasess/setup-php@v4
+        with:
+          php-version: ${{ matrix.php-version }}
 
       - run: composer validate --strict
 
