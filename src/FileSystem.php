@@ -258,4 +258,20 @@ final class FileSystem
             throw new IOException(sprintf('Failed to remove directory "%s": %s', $path, self::$lastError));
         }
     }
+
+    /**
+     * Renames source file or directory to destination.
+     *
+     * @param string $src Path of source file or directory.
+     * @param string $dest Path of destination.
+     *
+     * @return void
+     * @throws IOException If failed to rename the file.
+     */
+    public static function rename(string $src, string $dest): void
+    {
+        if (self::invoke('rename', $src, $dest) === false) {
+            throw new IOException(sprintf('Failed to rename "%s" to "%s": %s', $src, $dest, self::$lastError));
+        }
+    }
 }
