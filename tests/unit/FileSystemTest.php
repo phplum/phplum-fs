@@ -159,4 +159,44 @@ class FileSystemTest extends TestCase
         unlink($src);
         unlink($dest);
     }
+
+    /**
+     * Tests method `cp`
+     *
+     * @return void
+     * @throws Exception If not able to generate random bytes.
+     */
+    public function testCp(): void
+    {
+        $content1 = random_bytes(64);
+        $content2 = random_bytes(64);
+
+        $src = new Path($this->workDir, uniqid());
+        $subDir = uniqid();
+
+        FileSystem::mkdir(new Path($src, $subDir), 0777, true);
+
+        $file1 = uniqid();
+        FileSystem::writeFile(new Path($src, $file1), $content1);
+
+        $file2 = uniqid();
+        FileSystem::writeFile(new Path($src, $subDir, $file2), $content2);
+
+        $dest = new Path($this->workDir, uniqid());
+
+        FileSystem::cp($src, $dest);
+
+        $this->assertEquals($content1, file_get_contents(new Path($dest, $file1)));
+        $this->assertEquals($content2, file_get_contents(new Path($dest, $subDir, $file2)));
+
+        FileSystem::unlink(new Path($src, $subDir, $file2));
+        FileSystem::unlink(new Path($src, $file1));
+        rmdir(new Path($src, $subDir));
+        rmdir($src);
+
+        FileSystem::unlink(new Path($dest, $subDir, $file2));
+        FileSystem::unlink(new Path($dest, $file1));
+        rmdir(new Path($dest, $subDir));
+        rmdir($dest);
+    }
 }
