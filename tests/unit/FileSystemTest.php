@@ -134,4 +134,29 @@ class FileSystemTest extends TestCase
 
         $this->assertEquals(sha1($content), sha1_file($path));
     }
+
+    /**
+     * Tests method `copyFile`
+     *
+     * @return void
+     * @throws Exception If not able to generate random bytes.
+     */
+    public function testCopyFile(): void
+    {
+        $content = random_bytes(64);
+
+        $src = new Path($this->workDir, uniqid());
+        FileSystem::writeFile($src, $content);
+
+        $dest = new Path($this->workDir, uniqid());
+        $this->assertFalse(file_exists($dest));
+
+        FileSystem::copyFile($src, $dest);
+        $this->assertTrue(file_exists($src));
+        $this->assertTrue(file_exists($dest));
+        $this->assertEquals($content, file_get_contents($dest));
+
+        unlink($src);
+        unlink($dest);
+    }
 }
