@@ -199,4 +199,19 @@ class FileSystemTest extends TestCase
         rmdir(new Path($dest, $subDir));
         rmdir($dest);
     }
+
+    /**
+     * Tests method `rmdir`
+     *
+     * @return void
+     */
+    public function testRmdir()
+    {
+        $path = new Path($this->workDir, uniqid());
+        FileSystem::mkdir($path);
+        $this->assertTrue(is_dir($path));
+
+        FileSystem::rmdir($path);
+        $this->assertFalse(is_dir($path));
+    }
 }
