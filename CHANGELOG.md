@@ -19,6 +19,15 @@ to [Semantic Versioning][2].
 - Method `FileSystem::rm` to remove files or directories recursively.
 - Method `FileSystem::writeFile` to write data to files.
 
+## [1.1.0] - 2024-03-15
+
+### Added
+
+- Method `FileSystem::copyFile()` to copy files.
+- Method `FileSystem::cp()` to copy files or entire directories.
+- Method `FileSystem::rmdir()` to remove entire directories.
+- Method `FileSystem::rename()` to rename/move files or directories.
+
 [1]: https://keepachangelog.com/en/1.0.0/
 
 [2]: https://semver.org/spec/v2.0.0.html
