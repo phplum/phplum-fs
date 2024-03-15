@@ -30,7 +30,7 @@
         "post-autoload-dump": "./vendor/bin/captainhook install -f -s"
     },
     "require": {
-        "php": ">=8.1"
+        "php": ">=8.2"
     },
     "require-dev": {
         "captainhook/captainhook": "^5.24",
