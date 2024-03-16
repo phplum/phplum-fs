@@ -1,3 +1,5 @@
+![Logo](https://raw.githubusercontent.com/phplum/phplum.github.io/main/images/phplum.png)
+
 # phplum-fs
 
 ![License](https://img.shields.io/github/license/phplum/phplum-fs)
