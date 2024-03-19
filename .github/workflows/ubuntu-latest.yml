@@ -1,4 +1,4 @@
-name: Ubuntu Jammy Jellyfish
+name: Ubuntu Latest
 
 on:
   push:

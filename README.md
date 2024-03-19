@@ -4,8 +4,10 @@
 
 ![License](https://img.shields.io/github/license/phplum/phplum-fs)
 ![PHP Version](https://img.shields.io/packagist/dependency-v/phplum/fs/php)
-![Latest Version](https://img.shields.io/packagist/v/phplum/fs)
-![GitHub Action](https://img.shields.io/github/actions/workflow/status/phplum/phplum-fs/ubuntu-jammy.yml)
+![GitHub Action](https://img.shields.io/github/actions/workflow/status/phplum/phplum-fs/ubuntu-latest.yml)
+![Packagist Version](https://img.shields.io/packagist/v/phplum/fs)
+![Packagist Downloads](https://img.shields.io/packagist/dt/phplum/fs)
+![Packagist Stars](https://img.shields.io/packagist/stars/phplum/fs)
 
 This library provides methods for interacting with the file system in a way
 modeled on standard POSIX utilities.
